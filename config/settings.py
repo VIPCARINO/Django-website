@@ -208,8 +208,6 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 #MEDIA_URL = "/media/"
 #MEDIA_ROOT = BASE_DIR / "media"
 
-SITE_URL = "http://127.0.0.1:8000"
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
