@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [".onrender.com", "127.0.0.1", "localhost"]
 CSRF_TRUSTED_ORIGINS = [ "https://*.onrender.com" ]
@@ -35,9 +35,9 @@ CSRF_TRUSTED_ORIGINS = [ "https://*.onrender.com" ]
 import os
 
 CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": "dpcz2l00z",
-    "API_KEY": "887666925849495",
-    "API_SECRET": "XOPHrv13y1t0jAQ35bFMjQoxGno",
+    "CLOUD_NAME": config('CLOUD_NAME'),
+    "API_KEY": config('API_KEY'),
+    "API_SECRET": config('API_SECRET'),
 }
 
 # Application definition
