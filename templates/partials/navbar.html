@@ -1,0 +1,182 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+
+    <div class="container">
+
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold" href="/">
+            PGL
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <!-- Navbar Content -->
+        <div class="collapse navbar-collapse" id="mainNavbar">
+
+            <!-- Left Links -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                <!-- Home -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">
+                        Home
+                    </a>
+                </li>
+
+                <!-- About -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/about/">
+                        About
+                    </a>
+                </li>
+
+                <!-- Projects Dropdown -->
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown">
+
+                        Projects
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-dark">
+
+                        <!-- ALL -->
+                        <li>
+                            <a class="dropdown-item" href="/projects/">
+                                All Projects
+                            </a>
+                        </li>
+
+                        <!-- DYNAMIC CATEGORIES -->
+                        {% for cat in project_categories %}
+
+                            <li>
+                                <a class="dropdown-item" href="/projects/?category={{ cat }}">
+                                    {{ cat }}
+                                </a>
+                            </li>
+
+                        {% empty %}
+
+                            <li>
+                                <a class="dropdown-item disabled">
+                                    No categories yet
+                                </a>
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </li>
+                
+                <!-- Blogs Dropdown -->
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown">
+
+                        Blogs
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-dark">
+
+                        <li>
+                            <a class="dropdown-item" href="/blogs/">
+                                All Blogs
+                            </a>
+                        </li>
+
+                        <!-- DYNAMIC BLOGS -->
+                        {% for cat in blog_categories %}
+
+                            <li>
+                                <a class="dropdown-item" href="/blogs/?category={{ cat }}">
+                                    {{ cat }}
+                                </a>
+                            </li>
+
+                        {% empty %}
+
+                            <li>
+                                <a class="dropdown-item disabled">
+                                    No blogs yet
+                                </a>
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </li>
+
+                <!-- Products -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/products/">
+                        Products
+                    </a>
+                </li>
+
+                <!-- Contact -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact/">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+            <!-- Right Side -->
+            <div class="d-flex align-items-center ms-lg-3 mt-3 mt-lg-0 gap-2">
+
+                <!-- Search -->
+                <form class="d-flex me-2" action="/search/" method="GET">
+
+                    <input class="form-control form-control-sm me-2"
+                        type="search"
+                        name="q"
+                        placeholder="Search everything...">
+
+                    <button class="btn btn-outline-light btn-sm">
+                        Search
+                    </button>
+
+                </form>
+
+                {% if user.is_authenticated %}
+
+                    <span class="text-light ms-2">
+                        Welcome, {{ user.get_full_name|default:user.username }}
+                    </span>
+
+                {% else %}
+
+                    <a href="/accounts/login/"
+                    class="btn btn-secondary btn-sm ms-2">
+                        Login
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>

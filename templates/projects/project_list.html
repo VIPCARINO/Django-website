@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5 text-light">
+
+    <h1 class="fw-bold mb-4">Projects</h1>
+
+    <!-- CATEGORY FILTER BUTTONS -->
+    <div class="mb-4">
+
+        <a href="/projects/"
+            class="btn btn-sm btn-outline-light me-2 category-btn active"
+            data-category="all">
+                All
+        </a>
+
+        {% for cat in project_categories %}
+
+            <a href="/projects/?category={{ cat }}" class="btn btn-primary btn-sm">
+                    {{ cat|default:"Uncategorized" }}
+                </a>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- PROJECT GRID -->
+    <div id="project-grid">
+
+        <div class="row g-4">
+
+            {% for project in projects %}
+
+            <div class="col-md-4">
+
+                <div class="card bg-dark text-light border-0 shadow h-100">
+
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" class="card-img-top">
+                    {% else %}
+                        <img src="https://picsum.photos/600/400" class="card-img-top">
+                    {% endif %}
+
+                    <div class="card-body">
+
+                        <h5>{{ project.title }}</h5>
+
+                        <p class="text-secondary">
+                            {{ project.description|truncatewords:15 }}
+                        </p>
+
+                        <a href="{% url 'projects:project_detail' project.slug %}" class="btn btn-primary btn-sm">
+                            View
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+                <p class="text-muted">No projects found.</p>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+document.querySelectorAll(".category-btn").forEach(button => {
+
+    button.addEventListener("click", function () {
+
+        const category = this.dataset.category;
+
+        fetch(`/projects/?category=${category}`, {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        })
+        .then(response => response.text())
+        .then(html => {
+            document.querySelector("#project-grid").innerHTML = html;
+        });
+
+        // active state UI
+        document.querySelectorAll(".category-btn").forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        this.classList.add("active");
+
+    });
+
+});
+
+</script>
+
+{% endblock %}
+

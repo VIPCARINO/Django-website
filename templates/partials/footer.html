@@ -1,0 +1,153 @@
+<footer class="bg-dark text-light pt-5 pb-4 mt-5">
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Brand -->
+            <div class="col-md-4 mb-4">
+
+                <h4 class="fw-bold">
+                    Prime Grace Limited
+                </h4>
+
+                <p class="text-secondary">
+                    AI Engineer, Full Stack Developer, and Automation Builder creating intelligent digital solutions.
+                </p>
+
+                {% if user.is_authenticated %}
+
+                    <a href="/accounts/logout/"
+                    class="btn btn-danger btn-sm ms-0">
+                        Logout
+                    </a>
+
+                {% else %}
+                    
+                {% endif %}
+
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-2 mb-4">
+
+                <h5 class="fw-semibold">
+                    Links
+                </h5>
+
+                <ul class="list-unstyled">
+
+                    <li>
+                        <a href="/" class="text-decoration-none text-secondary">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/about/" class="text-decoration-none text-secondary">
+                            About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/projects/" class="text-decoration-none text-secondary">
+                            Projects
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/blogs/" class="text-decoration-none text-secondary">
+                            Blogs
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- Categories -->
+            <div class="col-md-3 mb-4">
+
+                <h5 class="fw-semibold">
+                    Categories
+                </h5>
+
+                <ul class="list-unstyled">
+
+                    <li class="text-secondary">
+                        AI Engineering
+                    </li>
+
+                    <li class="text-secondary">
+                        Automation
+                    </li>
+
+                    <li class="text-secondary">
+                        Web Development
+                    </li>
+
+                    <li class="text-secondary">
+                        SaaS Development
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- Contact -->
+            <div class="col-md-3 mb-4">
+
+                <h5 class="fw-semibold">
+                    Contact
+                </h5>
+
+                <p class="text-secondary mb-1">
+                    Lagos, Nigeria
+                </p>
+
+                <p class="text-secondary mb-1">
+                    your@email.com
+                </p>
+
+                <p class="text-secondary">
+                    Available for freelance & collaborations
+                </p>
+
+            </div>
+
+        </div>
+
+        <hr class="border-secondary">
+
+        <!-- Bottom Footer -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+
+            <p class="mb-2 mb-md-0 text-secondary">
+                © 2026 Prime Grace Limited. All rights reserved.
+            </p>
+
+            <!-- Social Links -->
+            <div>
+
+                <a href="#"
+                   class="text-decoration-none text-secondary me-3">
+                    GitHub
+                </a>
+
+                <a href="#"
+                   class="text-decoration-none text-secondary me-3">
+                    LinkedIn
+                </a>
+
+                <a href="#"
+                   class="text-decoration-none text-secondary">
+                    Twitter
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>

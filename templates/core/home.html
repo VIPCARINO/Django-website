@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="py-5 bg-dark text-light">
+
+    <div class="container text-center py-5">
+
+        <h1 class="display-4 fw-bold mb-3">
+            AI Engineer & Full Stack Developer
+        </h1>
+
+        <p class="lead text-secondary mb-4">
+            Building AI systems, automation tools, SaaS platforms, and modern web applications.
+        </p>
+
+        <a href="/projects/" class="btn btn-primary btn-lg me-2">
+            View Projects
+        </a>
+
+        <a href="/contact/" class="btn btn-outline-light btn-lg">
+            Contact Me
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ===================== -->
+<!-- FEATURED + RECENT PROJECTS -->
+<!-- ===================== -->
+<section class="py-5 position-relative">
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2 class="fw-bold">Projects</h2>
+
+        <a href="/projects/" class="btn btn-sm btn-outline-primary">
+            View All Projects→
+        </a>
+
+    </div>
+
+    <!-- PROJECTS GRID -->
+    <div id="projects-section">
+
+        {% include "core/partials/projects.html" %}
+
+    </div>
+
+<div class="section-divider"></div>
+
+<!-- ===================== -->
+<!-- BLOGS SECTION -->
+<!-- ===================== -->
+<section class="py-5 position-relative bg-dark text-light">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <h2 class="fw-bold">Blogs</h2>
+
+            <a href="/blogs/" class="btn btn-sm btn-outline-info">
+                View All Blogs <span>→</span>
+            </a>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- MAIN BLOGS -->
+            <div class="col-lg-8">
+
+                {% for blog in blogs %}
+
+                <div class="card bg-secondary border-0 shadow mb-4 text-light">
+
+                    {% if blog.image %}
+                        <img src="{{ blog.image.url }}" class="card-img-top" alt="{{ blog.title }}">
+                    {% else %}
+                        <img src="https://picsum.photos/800/400" class="card-img-top">
+                    {% endif %}
+
+                    <div class="card-body">
+
+                        <h5>{{ blog.title }}</h5>
+
+                        <p class="opacity-75">
+                            {{ blog.content|truncatewords:25 }}
+                        </p>
+
+                        <a href="{% url 'blogs:blog_detail' blog.slug %}" class="btn btn-outline-light btn-sm">
+                            Read More
+                        </a>
+
+                    </div>
+
+                </div>
+
+                {% empty %}
+                <p class="text-muted">No blogs available.</p>
+                {% endfor %}
+
+            </div>
+
+
+            <!-- SIDEBAR BLOGS -->
+            <div class="col-lg-4 sticky-sidebar">
+
+                <h5 class="fw-bold mb-3">Recent Blogs</h5>
+
+                {% for blog in latest_blogs %}
+
+                <div class="card bg-secondary border-0 mb-3 text-light">
+
+                    <div class="card-body">
+
+                        <h6>{{ blog.title }}</h6>
+
+                        <p class="small text-light opacity-75">
+                            {{ blog.description|truncatewords:8 }}
+                        </p>
+
+                        <a href="{% url 'blogs:blog_detail' blog.slug %}" class="btn btn-primary btn-sm">
+                            View
+                        </a>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===================== -->
+<!-- PRODUCTS SECTION (NEW) -->
+<!-- ===================== -->
+<section class="py-5 position-relative">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <h2 class="fw-bold">Products</h2>
+
+            <a href="/products/" class="btn btn-sm btn-outline-success">
+                View All Products <span>→</span>
+            </a>
+
+        </div>
+
+        <div class="row g-4">
+
+            {% for product in featured_products %}
+
+            <div class="col-md-4">
+
+                <div class="card bg-dark text-light border-0 shadow h-100">
+
+                    {% if product.image %}
+                    {% for img in product.images.all %}
+                        <img src="{{ img.image.url }}" class="card-img-top">
+                    {% endfor %}
+                    {% else %}
+                        <img src="https://picsum.photos/600/400" class="card-img-top">
+                    {% endif %}
+
+                    <div class="card-body">
+
+                        <h5>{{ product.title }}</h5>
+
+                        <p class="text-secondary">
+                            {{ product.description|truncatewords:15 }}
+                        </p>
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <span class="text-success fw-bold">
+                                {% if product.price %}
+                                ${{ product.price }}
+                                {% else %}
+                                Free
+                                {% endif %}
+                            </span>
+
+                            <a href="{% url 'products:product_detail' product.slug %}" class="btn btn-sm btn-primary">
+                                View
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+            <p class="text-muted">No products available.</p>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

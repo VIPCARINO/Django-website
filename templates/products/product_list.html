@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+
+<div class="container py-5 text-light">
+
+    <!-- HEADER -->
+    <div class="mb-4">
+        <h1 class="fw-bold">Software Products</h1>
+        <p class="text-secondary">
+            AI tools, automation systems, and software I’ve built.
+        </p>
+    </div>
+
+    <!-- SEARCH -->
+    <form method="get" class="mb-4">
+        <input type="text"
+               name="q"
+               value="{{ query }}"
+               class="form-control bg-dark text-light border-secondary"
+               placeholder="Search products...">
+    </form>
+
+    <!-- CATEGORY FILTER -->
+    <div class="mb-4 d-flex flex-wrap gap-2">
+
+        <a href="{% url 'products:product_list' %}"
+           class="btn btn-sm {% if not category_slug %}btn-primary{% else %}btn-outline-light{% endif %}">
+            All
+        </a>
+
+        {% for cat in categories %}
+            <a href="?category={{ cat.slug }}"
+               class="btn btn-sm {% if category_slug == cat.slug %}btn-primary{% else %}btn-outline-light{% endif %}">
+                {{ cat.name }}
+            </a>
+        {% endfor %}
+
+    </div>
+
+    <!-- PRODUCTS GRID -->
+    <div class="row g-4">
+
+        {% for product in products %}
+
+        <div class="col-md-4">
+
+            <div class="card bg-dark text-light border-0 shadow h-100">
+
+                {% if product.image %}
+                    <img src="{{ product.image.url }}"
+                         class="card-img-top"
+                         style="height:200px; object-fit:cover;">
+                {% endif %}
+
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="fw-bold">{{ product.title }}</h5>
+
+                    <p class="text-secondary small">
+                        {{ product.description|truncatechars:120 }}
+                    </p>
+
+                    {% if product.tech_stack %}
+                    <div class="mb-2">
+                        <small class="text-info">
+                            {{ product.tech_stack }}
+                        </small>
+                    </div>
+                    {% endif %}
+
+                    <div class="mt-auto d-flex gap-2">
+
+                        <a href="{% url 'products:product_detail' product.slug %}"
+                           class="btn btn-sm btn-outline-light">
+                            View
+                        </a>
+
+                        {% if product.live_url %}
+                        <a href="{{ product.live_url }}"
+                           class="btn btn-sm btn-primary"
+                           target="_blank">
+                            Live
+                        </a>
+                        {% endif %}
+
+                        {% if product.github_url %}
+                        <a href="{{ product.github_url }}"
+                           class="btn btn-sm btn-dark border"
+                           target="_blank">
+                            GitHub
+                        </a>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <p class="text-secondary">No products found.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

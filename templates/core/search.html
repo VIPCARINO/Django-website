@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5 text-light">
+
+    <h2 class="mb-4">
+        Search Results for "{{ query }}"
+    </h2>
+
+    <!-- PROJECTS -->
+    <h4 class="text-primary mt-4">Projects</h4>
+
+    {% for project in projects %}
+        <div class="p-3 bg-dark rounded mb-2">
+            <a href="{% url 'project_detail' project.slug %}" class="text-light">
+                {{ project.title }}
+            </a>
+        </div>
+    {% empty %}
+        <p class="text-secondary">No projects found.</p>
+    {% endfor %}
+
+    <!-- BLOGS -->
+    <h4 class="text-primary mt-4">Blogs</h4>
+
+    {% for blog in blogs %}
+        <div class="p-3 bg-dark rounded mb-2">
+            <a href="{% url 'blogs:blog_detail' blog.slug %}" class="text-light">
+                {{ blog.title }}
+            </a>
+        </div>
+    {% empty %}
+        <p class="text-secondary">No blogs found.</p>
+    {% endfor %}
+
+    <!-- PRODUCTS -->
+    <h4 class="text-primary mt-4">Products</h4>
+
+    {% for product in products %}
+        <div class="p-3 bg-dark rounded mb-2">
+            <a href="#" class="text-light">
+                {{ product.name }}
+            </a>
+        </div>
+    {% empty %}
+        <p class="text-secondary">No products found.</p>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

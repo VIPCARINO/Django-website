@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+
+<div class="container py-5 text-light">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+            <div class="card bg-dark border-0 shadow-lg rounded-4">
+
+                <div class="card-body p-5">
+
+                    <h1 class="fw-bold mb-3 text-center text-light fw-semibold">
+                        Contact Me
+                    </h1>
+
+                    <p class="text-light text-center mb-5">
+                        Have a project, idea, or collaboration?
+                        Send me a message.
+                    </p>
+
+                    {% if request.GET.success %}
+                    <div class="alert alert-success">
+                        Message sent successfully.
+                    </div>
+                    {% endif %}
+
+                    <form method="post">
+
+                        {% csrf_token %}
+
+                        <!-- Name -->
+                        <div class="mb-4">
+                            <label class="form-label text-light fw-semibold">
+                                Name
+                            </label>
+
+                            <input type="text"
+                                name="name"
+                                class="form-control form-control-lg bg-dark text-light border-secondary"
+                                placeholder="Your name"
+                                required>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-4">
+                            <label class="form-label text-light fw-semibold">
+                                Email
+                            </label>
+
+                            <input type="email"
+                                name="email"
+                                class="form-control form-control-lg bg-dark text-light border-secondary"
+                                placeholder="Your email"
+                                required>
+                        </div>
+
+                        <!-- Subject -->
+                        <div class="mb-4">
+                            <label class="form-label text-light fw-semibold">
+                                Subject
+                            </label>
+
+                            <input type="text"
+                                name="subject"
+                                class="form-control form-control-lg bg-dark text-light border-secondary"
+                                placeholder="Subject"
+                                required>
+                        </div>
+
+                        <!-- Message -->
+                        <div class="mb-4">
+                            <label class="form-label text-light fw-semibold">
+                                Message
+                            </label>
+
+                            <textarea name="message"
+                                    rows="6"
+                                    class="form-control bg-dark text-light border-secondary"
+                                    placeholder="Write your message..."
+                                    required></textarea>
+                        </div>
+
+                        <button class="btn btn-primary btn-lg w-100">
+                            Send Message
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

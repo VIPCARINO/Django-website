@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.title }}{% endblock %}
+
+{% block content %}
+
+<div class="container py-5 text-light">
+
+    <h1 class="fw-bold">{{ product.title }}</h1>
+
+    {% if product.images.all %}
+
+    <div class="mt-5">
+
+        <h4 class="fw-bold mb-3">Gallery</h4>
+
+        <div class="row g-3">
+
+            {% for img in product.images.all %}
+
+            <div class="col-md-4">
+
+                <div class="card bg-dark border-0 shadow">
+
+                    <a href="{{ img.image.url }}" target="_blank">
+                    <img src="{{ img.image.url }}"
+                        class="img-fluid rounded"
+                        style="height:200px; object-fit:cover;">
+                    </a>
+
+                    {% if img.caption %}
+                    <div class="p-2 text-secondary small">
+                        {{ img.caption }}
+                    </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="d-flex align-items-center gap-3 mt-3">
+
+        <span class="text-secondary">
+            ❤️ {{ product.likes.count }} likes
+        </span>
+
+        {% if user.is_authenticated %}
+
+            <form method="post" action="{% url 'products:toggle_like' product.slug %}">
+                {% csrf_token %}
+                <button class="btn btn-sm btn-outline-danger">
+                    Like / Unlike
+                </button>
+            </form>
+
+        {% else %}
+
+            <small class="text-secondary">
+                Login to like this product
+            </small>
+
+        {% endif %}
+
+    </div>
+
+    
+
+    {% endif %}
+
+    <p class="text-secondary">
+        {{ product.description|linebreaks }}
+    </p>
+
+    {% if product.tech_stack %}
+    <p class="text-info">
+        Tech Stack: {{ product.tech_stack }}
+    </p>
+    {% endif %}
+
+    <div class="d-flex gap-2 mt-3">
+
+        {% if product.live_url %}
+        <a href="{{ product.live_url }}" class="btn btn-primary">
+            Live Demo
+        </a>
+        {% endif %}
+
+        {% if product.github_url %}
+        <a href="{{ product.github_url }}" class="btn btn-dark border">
+            GitHub
+        </a>
+        {% endif %}
+
+    </div>
+
+    <div class="mt-4">
+
+            <h6 class="text-secondary">Rate this product</h6>
+
+            {% if user.is_authenticated %}
+
+            <form method="post" action="{% url 'products:rate_product' product.slug %}">
+                {% csrf_token %}
+
+                <select name="rating" class="form-select w-auto bg-dark text-light border-secondary">
+                    <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                    <option value="4">⭐⭐⭐⭐ (4)</option>
+                    <option value="3">⭐⭐⭐ (3)</option>
+                    <option value="2">⭐⭐ (2)</option>
+                    <option value="1">⭐ (1)</option>
+                </select>
+
+                <button class="btn btn-sm btn-primary mt-2">
+                    Submit Rating
+                </button>
+            </form>
+
+            {% else %}
+                <small class="text-secondary">Login to rate this product</small>
+            {% endif %}
+
+        </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,111 @@
+body {
+    background-color: #111827;
+    color: white;
+}
+
+/* Navbar hover */
+.nav-link:hover {
+    color: #0d6efd !important;
+}
+
+/* Dropdown hover */
+.dropdown-item:hover {
+    background-color: #0d6efd;
+}
+
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    height: 220px;
+    object-fit: cover;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* =========================
+   STICKY SIDEBAR (MEDIUM STYLE)
+========================= */
+.sticky-sidebar {
+    position: sticky;
+    top: 90px;
+}
+
+/* =========================
+   SECTION SEPARATORS
+========================= */
+.section-divider {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+/* =========================
+   VIEW ALL ANIMATION
+========================= */
+.view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease-in-out;
+}
+
+.view-all:hover {
+    transform: translateX(5px);
+}
+
+/* arrow animation */
+.view-all span {
+    transition: transform 0.2s ease-in-out;
+}
+
+.view-all:hover span {
+    transform: translateX(4px);
+}
+
+.category-btn.active {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
+
+.dot-btn{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    border:none;
+    background:#6c757d;
+    transition:0.3s ease;
+    padding:0;
+}
+
+.dot-btn:hover{
+    transform:scale(1.2);
+    background:#0d6efd;
+}
+
+.active-dot{
+    background:#0d6efd;
+    width:14px;
+    height:14px;
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 10px rgba(13,110,253,0.5);
+}
+
+.project-card {
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}

@@ -1,0 +1,7 @@
+{
+    "agents": [
+        "project_agent"
+    ],
+    "reason": "The question is asking about the number of projects on the site, which is directly related to the project agent's domain.",
+    "needs_escalation": false
+}

@@ -1,0 +1,97 @@
+<div class="row g-4">
+
+    <!-- MAIN PROJECTS -->
+    <div class="col-lg-8">
+
+        <div class="row g-4" id="project-grid">
+
+            {% for project in page_obj %}
+
+            <div class="col-md-6">
+
+                <div class="card bg-dark text-light border-0 shadow h-100">
+
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" class="card-img-top">
+                    {% else %}
+                        <img src="https://picsum.photos/600/400" class="card-img-top">
+                    {% endif %}
+
+                    <div class="card-body">
+
+                        <h5>{{ project.title }}</h5>
+
+                        <p class="text-secondary">
+                            {{ project.description|truncatewords:15 }}
+                        </p>
+
+                        <a href="{% url 'projects:project_detail' project.slug %}" class="btn btn-primary btn-sm">
+                            View
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- PAGINATION BUTTONS -->
+        <!-- DOT PAGINATION -->
+        <div class="d-flex justify-content-center align-items-center gap-2 mt-4">
+
+            {% if page_obj.has_previous %}
+                <button class="dot-btn"
+                        hx-get="?page={{ page_obj.previous_page_number }}"
+                        hx-target="#projects-section"
+                        hx-swap="innerHTML">
+                </button>
+            {% endif %}
+
+            <button class="dot-btn active-dot"></button>
+
+            {% if page_obj.has_next %}
+                <button class="dot-btn"
+                        hx-get="?page={{ page_obj.next_page_number }}"
+                        hx-target="#projects-section"
+                        hx-swap="innerHTML">
+                </button>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- SIDEBAR (RESTORED) -->
+    <div class="col-lg-4 sticky-sidebar">
+
+        <h5 class="fw-bold mb-3">Recent Projects</h5>
+
+        {% for project in latest_projects %}
+
+        <div class="card bg-secondary border-0 mb-3 text-light">
+
+            <div class="card-body">
+
+                <h6>{{ project.title }}</h6>
+
+                <p class="small text-light opacity-75">
+                    {{ project.description|truncatewords:8 }}
+                </p>
+
+                <a href="{% url 'projects:project_detail' project.slug %}" class="btn btn-primary btn-sm">
+                    View
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
