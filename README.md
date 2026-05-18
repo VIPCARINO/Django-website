@@ -93,6 +93,7 @@ Installation
 Clone the Repository
 
 git clone https://github.com/VIPCARINO/Django-website.git
+
 cd project-name
 
 Create Virtual Environment
